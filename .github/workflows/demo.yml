@@ -1,23 +1,22 @@
-name: demo
+name: Manual Trigger Workflow
 
 on:
-  push:
-    workflow_dispatch:
-      inputs:
-        trigger_mode:
-          description: 'Select your trigger mode :'
-          required: true
-          type: choice
-          options:
-            - BE TAG SANITY
-            - MOBILE REGRESSION
-            - WEB REGRESSION
-            - API REGRESSION
-        qa_box:
-          description: 'Select your QA box :'
-          default: 1
-          required: true
-          type: number
+  workflow_dispatch:
+    inputs:
+      trigger_mode:
+        description: "Select your trigger mode :"
+        required: true
+        type: choice
+        options:
+          - BE TAG SANITY
+          - MOBILE REGRESSION
+          - WEB REGRESSION
+          - API REGRESSION
+      qa_box:
+        description: "Select your QA box :"
+        default: 1
+        required: true
+        type: number
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,8 +24,10 @@ env:
   GITHUB_WORKSPACE: ${{ github.workspace }}
 
 jobs:
-  run-tests:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        runs: echo "Checking out repository"
+      - name: Show selected options
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Run tests: ${{ github.event.inputs.run_tests }}"
