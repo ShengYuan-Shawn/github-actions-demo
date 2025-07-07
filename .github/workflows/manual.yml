@@ -12,7 +12,7 @@ on:
           - MOBILE REGRESSION
           - WEB REGRESSION
           - API REGRESSION
-      qa_box:
+      qabox:
         description: "Select your QA box :"
         default: 1
         required: true
@@ -29,5 +29,5 @@ jobs:
     steps:
       - name: Show selected options
         run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Run tests: ${{ github.event.inputs.run_tests }}"
+          echo "Environment: ${{ github.event.inputs.trigger_mode }}"
+          echo "Run tests: ${{ github.event.inputs.qabox }}"
